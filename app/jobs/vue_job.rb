@@ -8,7 +8,7 @@ class VueJob < ApplicationJob
   end
 
   def perform
-    client.create_status(repo, sha, 'processing', { context: 'Running Checks' })
+    client.create_status(@repo, @sha, 'processing', { context: 'Running Checks' })
   end
 
   private
