@@ -8,7 +8,7 @@ class VueJob < ApplicationJob
   end
 
   def perform
-    client.create_status(@repo, @sha, 'success', { context: 'Checks Ran' })
+    client.create_status(@repo, @sha, 'success', { context: 'Eslint Checks' })
   end
 
   private
