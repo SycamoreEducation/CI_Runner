@@ -1,7 +1,7 @@
 class VueJob < ApplicationJob
   queue_as :default
 
-  def initialize(rep, sha, branch)
+  def initialize(repo, sha, branch)
     @repo = repo
     @sha = sha
     @branch = branch
