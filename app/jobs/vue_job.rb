@@ -2,13 +2,13 @@ class VueJob < ApplicationJob
   queue_as :default
 
   def initialize(rep, sha, branch)
-    @rep = rep
+    @repo = repo
     @sha = sha
     @branch = branch
   end
 
   def perform
-    client.create_status(rep, sha, 'processing', { context: 'Running Checks' })
+    client.create_status(repo, sha, 'processing', { context: 'Running Checks' })
   end
 
   private
