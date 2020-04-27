@@ -8,7 +8,7 @@ class VueJob < ApplicationJob
   end
 
   def perform
-    resp = Shell.execute("cd ~/SycamoreSchoolVue; git checkout #{@branch}; git pull; yarn install; yarn lint --no-fix")
+    resp = Shell.execute("cd ~/SycamoreSchoolVue; git checkout #{@branch} --no-verify; git pull; yarn lint --no-fix")
     Rails.logger.debug resp.success?
     Rails.logger.debug resp.stdout
     Rails.logger.debug resp.stderr
