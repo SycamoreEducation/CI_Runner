@@ -5,7 +5,7 @@ class ProcessingController < ApplicationController
     branch = params[:pull_request][:head][:ref]
 
     client.create_status(repo, sha, 'pending', { context: 'Eslint Checks'})
-    VueJob.perform_later(repo, sha, branch)
+    VueJob.perform_now(repo, sha, branch)
   end
 
   private
