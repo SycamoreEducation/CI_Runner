@@ -1,5 +1,5 @@
 class VueJob < ApplicationJob
-  queue_as :default
+  queue_as :high_priority
 
   def initialize(repo, sha, branch)
     @repo = repo
