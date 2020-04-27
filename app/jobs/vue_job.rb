@@ -9,6 +9,7 @@ class VueJob < ApplicationJob
 
   def perform
     resp = Shell.execute("cd ~/SycamoreSchoolVue; git checkout #{@branch}; git pull; yarn lint --no-fix")
+    Rails.logger.debug resp.success?
     client.create_status(@repo, @sha, resp.success? ? 'success' : 'failure', { context: 'Eslint Checks' })
   end
 
