@@ -1,16 +1,11 @@
 class ProcessingController < ApplicationController
   def create
-    Rails.logger.debug "RUNNING ACTION: #{action}"
-    case action
-    when 'pull_request'
-      Rails.logger.debug 'run pull request'
-      client.create_status(
-        params[:pull_request][:head][:repo][:full_name],
-        params[:pull_request][:head][:sha],
-        'pending',
-        { context: 'Eslint Checks' }
-      )
-    end
+    repo = params[:pull_request][:head][:repo][:full_name]
+    sha = params[:pull_request][:head][:sha]
+    branch = [:pull_request][:head][:ref]
+
+    client.create_status(repo, sha, 'pending', { context: 'Eslint Checks'})
+    VueJob.perform_now(rep, sha, branch)
   end
 
   private
